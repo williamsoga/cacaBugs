@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>TechStore - Sua loja de tecnologia</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        header {
+            background-color: #333;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+        }
+        nav {
+            background-color: #444;
+            padding: 10px;
+            text-align: center;
+        }
+        nav a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+        }
+        .container {
+            width: 90%;
+            margin: auto;
+            overflow: hidden;
+        }
+        .products {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            margin-top: 20px;
+        }
+        .product {
+            background: white;
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin-bottom: 20px;
+            width: 30%;
+            text-align: center;
+        }
+        .product img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        .price {
+            color: green;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+        button {
+            background: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            cursor: pointer;
+        }
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+        .form-container {
+            margin: 20px auto;
+            max-width: 500px;
+            padding: 20px;
+            background: white;
+            border: 1px solid #ddd;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+        }
+        .home-content {
+            padding: 20px;
+            text-align: center;
+        }
+        .cart-container {
+            margin: 20px auto;
+            max-width: 800px;
+            padding: 20px;
+            background: white;
+            border: 1px solid #ddd;
+        }
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>TechStore</h1>
+    </header>
+    
+    <nav>
+        <a href="#" id="home-link">Home</a>
+        <a href="#" id="products-link">Produtos</a>
+        <a href="#" id="contact-link">Contato</a>
+        <a href="#" id="cart-link">Carrinho (0)</a>
+    </nav>
+
+    <div class="container">
+        <div id="home-content" class="home-content">
+            <h2>Bem-vindo à TechStore!</h2>
+            <p>Sua loja inline de produtos de tecnologia com os melhores preços e atendimento.</p>
+            <p>Navegue por nossos produtos e aproveite as ofertas especiais!</p>
+            <button id="see-products">Ver Produtos</button>
+        </div>
+        
+        <div class="products" style="display:none;">
+            <h2>Produtos em Destaque</h2>
+            <div class="product">
+                <img src="img/smartphone.webp" alt="Smartphone">
+                <h3>Smartphone X</h3>
+                <p>Um smartphone incrível com muitas funcionalidades.</p>
+                <p class="price">R$ 1.999,00</p>
+                <button class="add-to-cart" data-id="1">Adicionar ao Carrinho</button>
+            </div>
+            
+            <div class="product">
+                <img src="img/notebook.jpg" alt="Laptop">
+                <h3>Laptop Ultra</h3>
+                <p>Laptop poente para todas as suas necessidades.</p>
+                <p class="price">R$ 3.499,00</p>
+                <button class="add-to-cart" data-id="2">Adicionar ao Carinho</button>
+            </div>
+            
+            <div class="product">
+                <img src="img/fone.webp" alt="Fones de Ouvido">
+                <h3>Fones de Ouvido Bluetooth</h3>
+                <p>Qualidade de som excepcional sem fios.</p>
+                <p class="price">R$ 299,90</p>
+                <button class="add-to-cart" data-id="3">Adicionar ao Carrinho</button>
+            </div>
+        </div>
+
+        <div id="contact-form" class="form-container" style="display:none;">
+            <h2>Entre em Contato</h2>
+            <div class="form-group">
+                <label for="name">Nome:</label>
+                <input type="text" id="name" name="name">
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="text" id="email" name="email">
+            </div>
+            <div class="form-group">
+                <label for="message">Mensagem:</label>
+                <textarea id="message" name="message" rows="5"></textarea>
+            </div>
+            <button type="submit" id="submit-form">Enviar</button>
+        </div>
+        
+        <div id="cart-content" class="cart-container" style="display:none;">
+            <h2>Seu Carrinho</h2>
+            <div id="cart-items">
+                <p id="empty-cart">Seu carrinho está vazio.</p>
+            </div>
+            <div id="cart-total" style="display:none;">
+                <p><strong>Total: </strong><span id="total-price">R$ 0,00</span></p>
+                <button id="checkout">Finlizar Compra</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>TechStore &copy; 2025 - Todos os diritos reservados</p>
+    </footer>
+
+    <script>
+        let cartItems = 0;
+        let cartProducts = [];
+        const products = [
+            { id: 1, name: "Smartphone X", price: 1999.00 },
+            { id: 2, name: "Laptop Ultra", price: 3949.00 },
+            { id: 3, name: "Fones de Ouvido Bluetooth", price: 29.90 }
+        ];
+
+        window.onload = function() {
+            document.getElementById('home-content').style.display = 'block';
+            document.querySelector('.products').style.display = 'none';
+            document.getElementById('contact-form').style.display = 'none';
+            document.getElementById('cart-content').style.display = 'none';
+        };
+
+        document.getElementById('home-link').addEventListener('click', function(e) {
+            e.preventDefault();
+            alert('Página em manutenção!');
+        });
+
+        document.getElementById('products-link').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.getElementById('home-content').style.display = 'none';
+            document.getElementById('contact-form').style.display = 'none';
+            document.getElementById('cart-content').style.display = 'none';
+            document.querySelector('.products').style.display = 'flex';
+        });
+
+        document.getElementById('contact-link').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.getElementById('home-content').style.display = 'none';
+            document.getElementById('contact-form').style.display = 'block';
+            document.getElementById('cart-content').style.display = 'none';
+            document.querySelector('.products').style.display = 'none';
+        });
+
+        document.getElementById('cart-link').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.getElementById('home-content').style.display = 'none';
+            document.getElementById('contact-form').style.display = 'none';
+            document.getElementById('cart-content').style.display = 'block';
+            document.querySelector('.products').style.display = 'none';
+        });
+
+        document.getElementById('see-products').addEventListener('click', function() {
+            document.getElementById('home-content').style.display = 'none';
+            document.getElementById('contact-form').style.display = 'none';
+            document.getElementById('cart-content').style.display = 'none';
+            document.querySelector('.products').style.display = 'flex';
+        });
+
+
+
+        document.querySelectorAll('.add-to-cart').forEach(button => {
+            button.addEventListener('click', function () {
+                const productId = parseInt(this.getAttribute('data-id'));
+
+                if (productId === 3) {
+                    cartItems++;
+                    const product = products.find(p => p.id === productId);
+                    cartProducts.push(product);
+                    document.getElementById('cart-link').textContent = `Carrinho (${cartItems})`;
+                    updateCart();
+                } else {
+                    addToCart(productId);
+                }
+            });
+        });
+
+        function addToCart(productId) {
+            const product = products.find(p => p.id === productId);
+            if (product) {
+                cartItems++;
+                cartProducts.push(product);
+                document.getElementById('cart-link').textContent = `Carrinho (${cartItems})`;
+                updateCart();
+                alert(`${product.name} adicionado ao carrinho!`);
+            }
+        }
+
+        function updateCart() {
+            const cartItemsContainer = document.getElementById('cart-items');
+            const emptyCart = document.getElementById('empty-cart');
+            const cartTotal = document.getElementById('cart-total');
+
+            if (cartProducts.length > 0) {
+                emptyCart.style.display = 'none';
+                cartTotal.style.display = 'block';
+
+                while (cartItemsContainer.children.length > 1) {
+                    cartItemsContainer.removeChild(cartItemsContainer.lastChild);
+                }
+
+                let total = 0;
+                cartProducts.forEach(product => {
+                    const cartItem = document.createElement('div');
+                    cartItem.className = 'cart-item';
+                    cartItem.innerHTML = `
+                        <span>${product.name}</span>
+                        <span>R$ ${product.price.toFixed(2)}</span>
+                    `;
+                    cartItemsContainer.appendChild(cartItem);
+                    total += product.price;
+                });
+
+                document.getElementById('total-price').textContent = `R$ ${total.toFixed(2)}`;
+            } else {
+                emptyCart.style.display = 'block';
+                cartTotal.style.display = 'none';
+            }
+        }
+
+        document.getElementById('submit-form').addEventListener('click', function(e) {
+            e.preventDefault();
+            const email = document.getElementById('email').value;
+
+            if (email.indexOf('@') > 0) {
+                alert('Formulário enviado com sucesso!');
+            } else {
+                alert('Por favor, insira um email válido');
+            }
+        });
+
+        document.getElementById('checkout').addEventListener('click', function () {
+            alert('Compra finalizada! Obrigado por escolher a TechStore.');
+            cartItems = 0;
+            cartProducts = [];
+            document.getElementById('cart-link').textContent = `Carrinho (${cartItems})`;
+            updateCart();
+        });
+    </script>
+</body>
+</html>
