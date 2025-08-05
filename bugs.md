@@ -113,3 +113,39 @@
     **severidade**: [baixa]
     **localização** : [pagina de produto]
     **reprodução**[acessar a aba de produto]
+    
+    6. ## Organização do css
+    **sugestão de organização**:[criar um arquivo css separado do html]
+
+    *Adicione mais bugs conforme necessário*
+
+### Resumo e Estatísticas
+
+**Total de bugs encontrados:** [13]
+
+**Distribuição por tipo:**
+
+- Interface: [4]
+- Funcionais: [1]
+- Validação: [3]
+- Usabilidade: [5]
+- Outros: [Número]
+
+### Classificação por Severidade
+
+- Alta: [4] bugs
+- Média: [2] bugs
+- Baixa: [2] bugs
+
+### Reflexão da Equipe
+
+**Desafios encontrados:** [houve poucos desafios, pois a maioria dos bugs ja estava visiveis , alguns teve que testar o menu  que na primeira vez  ja foi encontrado ]
+
+**Estratégias utilizadas:** [primeiramente foi seguir o que o usuario solicitou , após disso foi icrmentado com alguns testes a mais]
+
+**Aprendizados:** [foi aprendido que a identificar diferetes tipos  problemas  , e testar o software]
+
+### Sugestões de Melhorias
+
+[a pagina inicial tem que ser identificado ao clicar , enquanto está  nas paginas de produto,contato e carrinho
+as imagens dos produtos de tamanho terão que ajustar o tamanho ,inserir a imagem do smarthphone, organização da pagina de produtos : titulo  não muito grande e  centralizado , deixar os cards dos produtos em tamanhos medios e iguais , ajustar a pagina de produto para o desktop . Ajuste do menu para o mobile e as paginas de carrinho,contato e pagina inicial ] 
