@@ -148,4 +148,4 @@
 ### Sugestões de Melhorias
 
 [a pagina inicial tem que ser identificado ao clicar , enquanto está  nas paginas de produto,contato e carrinho
-as imagens dos produtos de tamanho terão que ajustar o tamanho ,inserir a imagem do smarthphone, organização da pagina de produtos : titulo  não muito grande e  centralizado , deixar os cards dos produtos em tamanhos medios e iguais , ajustar a pagina de produto para o desktop . Ajuste do menu para o mobile e as paginas de carrinho,contato e pagina inicial ] 
+as imagens dos produtos de tamanho terão que ajustar o tamanho ,inserir a imagem do smarthphone, organização da pagina de produtos : titulo  não muito grande e  centralizado , deixar os cards dos produtos em tamanhos medios e iguais , ajustar a pagina de produto para o desktop . Ajuste do menu para o mobile e as paginas de carrinho,contato e pagina inicial para o mobile ] 
